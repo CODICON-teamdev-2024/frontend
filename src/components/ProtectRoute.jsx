@@ -1,6 +1,7 @@
 import { Outlet, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext } from 'react';
+import { userContext } from '../context/UserProvider';
 export default function ProtectRoute() {
-	const { isAuth, setAuth } = useState(false);
-	return isAuth ? <Outlet /> : <Navigate to='/' />;
+	const { havUser } = useContext(userContext);
+	return havUser ? <Outlet /> : <Navigate to='/' />;
 }

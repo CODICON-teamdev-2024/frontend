@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Avatar, Box, Typography, Container } from '@mui/material';
 import LoginEl from '../components/LoginEl';
 import Logo from '../asset/Logo.svg';
-
+import { UserPovider } from '../context/UserProvider';
 export default function LoginPage() {
 	useEffect(() => {
 		document.title = 'Ingresar a EmoTranf';
@@ -27,7 +27,9 @@ export default function LoginPage() {
 				<Typography component='h1' variant='h5'>
 					Ingresar a EmoTranf
 				</Typography>
-				<LoginEl />
+				<UserPovider>
+					<LoginEl />
+				</UserPovider>
 			</Box>
 		</Container>
 	);
