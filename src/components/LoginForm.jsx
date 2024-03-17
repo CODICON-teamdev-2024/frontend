@@ -39,7 +39,7 @@ export default function LogingForm({ handleSubmit }) {
 			</Button>
 			<Grid container>
 				<Grid item>
-					<Link to='/' variant='body2'>
+					<Link to='/registro' variant='body2'>
 						{'No tienes cuenta? Registrate!'}
 					</Link>
 				</Grid>
