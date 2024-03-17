@@ -1,4 +1,5 @@
 import { Paper, Box } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 export default function Error({ element }) {
 	return (
 		<>
@@ -23,7 +24,7 @@ export default function Error({ element }) {
 						alignItems: 'center',
 						justifyContent: 'center',
 						width: '50vw',
-						height: '15vh',
+						height: '25vh',
 					}}
 				>
 					{element}

@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
 import { Avatar, Box, Typography, Container } from '@mui/material';
-import LoginEl from '../components/LoginEl';
+import { useEffect } from 'react';
 import Logo from '../asset/Logo.svg';
-
-export default function LoginPage() {
+import SingUpForm from '../components/SingUpForm';
+export default function SignUpPage() {
 	useEffect(() => {
-		document.title = 'Ingresar a EmoTranf';
+		document.title = 'Registrate en EmoTranf';
 	}, []);
 	return (
 		<Container component='main' maxWidth='xs'>
@@ -17,7 +16,7 @@ export default function LoginPage() {
 					alignItems: 'center',
 				}}
 			>
-				<Avatar sx={{ m: 1 }}>
+				<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
 					<img
 						src={Logo}
 						alt='Logo'
@@ -25,9 +24,9 @@ export default function LoginPage() {
 					/>
 				</Avatar>
 				<Typography component='h1' variant='h5'>
-					Ingresar a EmoTranf
+					Registrate en EmoTranf
 				</Typography>
-				<LoginEl />
+				<SingUpForm />
 			</Box>
 		</Container>
 	);

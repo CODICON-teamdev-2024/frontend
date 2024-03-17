@@ -1,12 +1,11 @@
 import { Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Typography, Box, Button } from '@mui/material';
-import LoginForm from './LoginForm';
-import loginServise from '../services/loginServise';
+import SingUpForm from './SingUpForm';
 import Loading from './Loading';
 import Error from './Error';
 import { Link } from 'react-router-dom';
-export default function LoginEl() {
+export default function SingUpEl() {
 	const [res, setRes] = useState(null);
 	const [isLoading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
@@ -24,6 +23,8 @@ export default function LoginEl() {
 		const url = '';
 		const data = new FormData(event.currentTarget);
 		const input = {
+			name: data.get('firstName'),
+			lastName: data.get('lastName'),
 			email: data.get('email'),
 			password: data.get('password'),
 		};
@@ -42,7 +43,6 @@ export default function LoginEl() {
 			})
 			.finally(() => {
 				setLoading(false);
-				loginServise(res, data.get('remember')); //value= 'on' || null
 				setDone(true);
 			});
 	};
@@ -76,8 +76,8 @@ export default function LoginEl() {
 					}
 				/>
 			)}
-			{isDone && !error && <Navigate to='/dashboard' />}
-			<LoginForm handleSubmit={handleSubmit} />
+			{isDone && !error && <Navigate to='/' />}
+			<SingUpForm handleSubmit={handleSubmit} />
 		</>
 	);
 }

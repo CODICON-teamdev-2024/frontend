@@ -3,12 +3,10 @@ import './App.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import LoginPage from './pages/LoginPage';
-import ProtectRoute from './components/ProtectRoute';
+import SignUpPage from './pages/SingUpPage';
 import Dashboard from './pages/Dashboard';
-import Error from './components/Error';
-const theme = createTheme({
-	palette: {},
-});
+import ProtectRoute from './components/ProtectRoute';
+const theme = createTheme();
 function App() {
 	return (
 		<>
@@ -17,7 +15,7 @@ function App() {
 				<BrowserRouter>
 					<Routes>
 						<Route path='/' element={<LoginPage />} />
-						<Route path='/registro' element={<LoginPage />} />
+						<Route path='/registro' element={<SignUpPage />} />
 						<Route element={<ProtectRoute />}>
 							<Route path='/dashboard' element={<Dashboard />} />
 						</Route>
