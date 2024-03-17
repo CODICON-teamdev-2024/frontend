@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Typography, Box, Button } from '@mui/material';
 import LoginForm from './LoginForm';
 import loginServise from '../services/loginServise';
 import Loading from './Loading';
@@ -24,30 +25,56 @@ export default function LoginEl() {
 		const input = {
 			email: data.get('email'),
 			password: data.get('password'),
-			remember: data.get('remember'), //value= 'on' || null
 		};
 		setLoading(true);
 		const requestOptions = {
-			method: 'GET',
-			headers: {},
-			body: input,
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(input),
 			signal: abortController.signal,
 		};
 		fetch(url, requestOptions)
 			.then(res => res.json())
 			.then(res => setRes(res))
-			.catch(() => setError(true))
+			.catch(error => {
+				setError(error);
+				console.log(error);
+			})
 			.finally(() => {
 				setLoading(false);
-				loginServise(res);
+				loginServise(res, data.get('remember')); //value= 'on' || null
 				setDone(true);
 			});
 	};
 	return (
 		<>
 			{isLoading && <Loading />}
-			{error && <Error />}
-			{isDone && <Navigate to='/dashboard' />}
+			{error && (
+				<Error
+					element={
+						<Box
+							sx={{
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'space-between',
+								backgroundColor: 'error.main',
+								color: 'white',
+								padding: '8px 16px',
+								borderRadius: '4px',
+							}}
+						>
+							<Typography variant='body1'>
+								Error al iniciar sesión. Por favor, verifica tus datos e
+								inténtalo de nuevo.
+							</Typography>
+							<Button onClick={onClose} color='inherit'>
+								Cerrar
+							</Button>
+						</Box>
+					}
+				/>
+			)}
+			{isDone && !error && <Navigate to='/dashboard' />}
 			<LoginForm handleSubmit={handleSubmit} />
 		</>
 	);
