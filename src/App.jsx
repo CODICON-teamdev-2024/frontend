@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SingUpPage';
 import Dashboard from './pages/Dashboard';
 import ProtectRoute from './components/ProtectRoute';
+import { UserPovider } from './context/UserProvider';
 const theme = createTheme();
 function App() {
 	return (
@@ -16,7 +17,13 @@ function App() {
 					<Routes>
 						<Route path='/' element={<LoginPage />} />
 						<Route path='/registro' element={<SignUpPage />} />
-						<Route element={<ProtectRoute />}>
+						<Route
+						/* element={
+								<UserPovider>
+									<ProtectRoute />
+								</UserPovider>
+							} */
+						>
 							<Route path='/dashboard' element={<Dashboard />} />
 						</Route>
 					</Routes>

@@ -6,12 +6,15 @@ import loginServise from '../services/loginServise';
 import Loading from './Loading';
 import Error from './Error';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { userContext } from '../context/UserProvider';
 export default function LoginEl() {
 	const [res, setRes] = useState(null);
 	const [isLoading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 	const [isDone, setDone] = useState(false);
 	const [abortController, setAbortController] = useState(null);
+	const { haveUser, setHaveUser } = useContext(userContext);
 	useEffect(() => {
 		const controller = new AbortController();
 		setAbortController(controller);
@@ -42,12 +45,16 @@ export default function LoginEl() {
 			})
 			.finally(() => {
 				setLoading(false);
-				loginServise(res, data.get('remember')); //value= 'on' || null
+				if (res) {
+					loginServise(res, data.get('remember'));
+					setHaveUser(true);
+				}
 				setDone(true);
 			});
 	};
 	return (
 		<>
+			{haveUser && <Navigate to='/dashboard' />}
 			{isLoading && <Loading />}
 			{error && (
 				<Error
@@ -69,6 +76,7 @@ export default function LoginEl() {
 								to='/'
 								variant='outlined'
 								sx={{ marginTop: 4, padding: '2 5' }}
+								onClick={() => setError(false)}
 							>
 								Volver
 							</Button>
