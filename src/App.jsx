@@ -18,11 +18,11 @@ function App() {
 						<Route path='/' element={<LoginPage />} />
 						<Route path='/registro' element={<SignUpPage />} />
 						<Route
-						/* element={
+							element={
 								<UserPovider>
 									<ProtectRoute />
 								</UserPovider>
-							} */
+							}
 						>
 							<Route path='/dashboard' element={<Dashboard />} />
 						</Route>
